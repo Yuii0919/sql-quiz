@@ -240,7 +240,7 @@ function renderFeedback(q, result) {
     feedback.classList.add("wrong");
     feedback.innerHTML =
       '<p class="feedback-title">✗ 答錯了</p>' +
-      '<p class="feedback-detail">請看選項下方綠色區塊的完整正解。</p>';
+      '<p class="feedback-detail">請看選項下方灰藍色區塊的完整正解。</p>';
   }
 }
 
