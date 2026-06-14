@@ -4,7 +4,11 @@
   --primary: #1a56db;
   --primary-dark: #1444b0;
   --success: #059669;
-  --error: #dc2626;
+  --success-soft: #ecfdf5;
+  --success-border: #6ee7b7;
+  --error: #b91c1c;
+  --error-soft: #fef8f8;
+  --error-border: #fca5a5;
   --text: #1e293b;
   --text-muted: #64748b;
   --border: #e2e8f0;
@@ -258,21 +262,23 @@ body {
 }
 
 .option label.correct {
-  border-color: var(--success);
-  background: #ecfdf5;
-  border-width: 3px;
-  box-shadow: 0 0 0 1px rgba(5, 150, 105, 0.15);
+  border-color: var(--success-border);
+  background: var(--success-soft);
+  border-width: 2px;
 }
 
 .option label.wrong {
-  border-color: var(--error);
-  background: #fef2f2;
-  border-width: 3px;
-  box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.15);
+  border-color: var(--error-border);
+  background: var(--error-soft);
+  border-width: 2px;
+}
+
+.option label.wrong .option-letter {
+  color: var(--error);
 }
 
 .option label.dimmed {
-  opacity: 0.45;
+  opacity: 0.55;
 }
 
 .option-badge {
@@ -286,13 +292,15 @@ body {
 }
 
 .badge-correct {
-  background: var(--success);
-  color: white;
+  background: var(--success-soft);
+  color: var(--success);
+  border: 1px solid var(--success-border);
 }
 
 .badge-wrong {
-  background: var(--error);
-  color: white;
+  background: var(--error-soft);
+  color: var(--error);
+  border: 1px solid var(--error-border);
 }
 
 .option.multi label.selected {
@@ -347,23 +355,29 @@ body {
 }
 
 .feedback.wrong .answer-reveal {
-  border-color: #fecaca;
+  border-color: var(--error-border);
+  background: var(--surface);
 }
 
 .feedback.correct .answer-reveal {
-  border-color: #a7f3d0;
+  border-color: var(--success-border);
 }
 
 .feedback.correct {
-  background: #ecfdf5;
+  background: var(--success-soft);
   color: var(--success);
-  border: 1px solid #a7f3d0;
+  border: 1px solid var(--success-border);
 }
 
 .feedback.wrong {
-  background: #fef2f2;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--error-border);
+}
+
+.feedback.wrong .feedback-title {
   color: var(--error);
-  border: 1px solid #fecaca;
+  font-size: 1rem;
 }
 
 .feedback.neutral {
@@ -404,11 +418,35 @@ body {
   }
 
   .option label.correct {
-    background: #064e3b;
+    background: rgba(6, 78, 59, 0.35);
+    border-color: #047857;
   }
 
   .option label.wrong {
-    background: #450a0a;
+    background: rgba(127, 29, 29, 0.2);
+    border-color: #991b1b;
+  }
+
+  .badge-correct {
+    background: rgba(6, 78, 59, 0.35);
+    color: #6ee7b7;
+    border-color: #047857;
+  }
+
+  .badge-wrong {
+    background: rgba(127, 29, 29, 0.25);
+    color: #fca5a5;
+    border-color: #991b1b;
+  }
+
+  .feedback.wrong {
+    background: var(--surface);
+    color: var(--text);
+    border-color: #991b1b;
+  }
+
+  .feedback.wrong .feedback-title {
+    color: #fca5a5;
   }
 
   .answer-reveal {
