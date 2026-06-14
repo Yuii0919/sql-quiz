@@ -131,6 +131,8 @@ function renderQuestion() {
   $("#btn-submit").classList.remove("hidden");
   $("#btn-next").classList.add("hidden");
   $("#feedback").classList.add("hidden");
+  $("#answer-panel").classList.add("hidden");
+  $("#answer-panel").innerHTML = "";
 }
 
 function getExpectedIds(q) {
@@ -140,15 +142,6 @@ function getExpectedIds(q) {
 
 function getOptionById(q, id) {
   return q.options.find((o) => o.id === id);
-}
-
-function formatAnswerLines(q) {
-  if (!q.answer) return [];
-  return [...getExpectedIds(q)].map((id) => {
-    const opt = getOptionById(q, id);
-    const letter = id.toUpperCase();
-    return opt ? `${letter}. ${opt.text}` : letter;
-  });
 }
 
 function checkAnswer(q, chosen) {
@@ -164,6 +157,8 @@ function checkAnswer(q, chosen) {
 
 function highlightResults(q, chosen) {
   const expected = getExpectedIds(q);
+  let firstCorrect = null;
+
   document.querySelectorAll(".option input").forEach((input) => {
     input.disabled = true;
     const label = input.closest("label");
@@ -172,14 +167,55 @@ function highlightResults(q, chosen) {
 
     if (expected.has(id)) {
       label.classList.add("correct");
-      addOptionBadge(label, "正解", "badge-correct");
+      addOptionBadge(label, "✓ 正解", "badge-correct");
+      if (!firstCorrect) firstCorrect = label;
     } else if (chosen.has(id)) {
       label.classList.add("wrong");
-      addOptionBadge(label, "你的答案", "badge-wrong");
+      addOptionBadge(label, "你的選擇", "badge-wrong");
     } else if (q.answer) {
       label.classList.add("dimmed");
     }
   });
+
+  if (firstCorrect) {
+    setTimeout(() => {
+      firstCorrect.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+  }
+}
+
+function showAnswerPanel(q) {
+  const panel = $("#answer-panel");
+  if (!q.answer) {
+    panel.classList.add("hidden");
+    panel.innerHTML = "";
+    return;
+  }
+
+  panel.innerHTML = '<div class="answer-panel-heading">✓ 正確答案</div>';
+  const list = document.createElement("div");
+  list.className = "answer-panel-list";
+
+  [...getExpectedIds(q)].forEach((id) => {
+    const opt = getOptionById(q, id);
+    if (!opt) return;
+    const row = document.createElement("div");
+    row.className = "answer-panel-item";
+
+    const letter = document.createElement("span");
+    letter.className = "answer-panel-letter";
+    letter.textContent = id.toUpperCase();
+
+    const text = document.createElement("span");
+    text.className = "answer-panel-text";
+    text.textContent = opt.text;
+
+    row.append(letter, text);
+    list.appendChild(row);
+  });
+
+  panel.appendChild(list);
+  panel.classList.remove("hidden");
 }
 
 function addOptionBadge(label, text, className) {
@@ -190,7 +226,7 @@ function addOptionBadge(label, text, className) {
   label.appendChild(badge);
 }
 
-function renderFeedback(q, result, chosen) {
+function renderFeedback(q, result) {
   const feedback = $("#feedback");
   feedback.classList.remove("hidden", "correct", "wrong", "neutral");
   feedback.innerHTML = "";
@@ -203,34 +239,15 @@ function renderFeedback(q, result, chosen) {
     return;
   }
 
-  const answerLines = formatAnswerLines(q);
-  const reveal = document.createElement("div");
-  reveal.className = "answer-reveal";
-  answerLines.forEach((line) => {
-    const row = document.createElement("div");
-    row.className = "answer-reveal-line";
-    row.textContent = line;
-    reveal.appendChild(row);
-  });
-
   if (result) {
     feedback.classList.add("correct");
     feedback.innerHTML = '<p class="feedback-title">✓ 答對了！</p>';
-    if (answerLines.length) {
-      const detail = document.createElement("p");
-      detail.className = "feedback-detail";
-      detail.textContent = "正確答案：";
-      feedback.append(detail, reveal);
-    }
   } else {
     feedback.classList.add("wrong");
     feedback.innerHTML =
       '<p class="feedback-title">✗ 答錯了</p>' +
-      '<p class="feedback-detail">正確答案如下（選項已標示綠色「正解」、紅色「你的答案」）：</p>';
-    feedback.append(reveal);
+      '<p class="feedback-detail">請看選項下方綠色區塊的完整正解。</p>';
   }
-
-  feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function recordProgress(qid, isCorrect) {
@@ -248,7 +265,14 @@ function submitAnswer() {
   const result = checkAnswer(q, [...selected]);
 
   highlightResults(q, selected);
-  renderFeedback(q, result, selected);
+  showAnswerPanel(q);
+  renderFeedback(q, result);
+
+  if (q.answer) {
+    setTimeout(() => {
+      $("#answer-panel").scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 150);
+  }
   recordProgress(q.id, result === true);
 
   $("#btn-submit").classList.add("hidden");
