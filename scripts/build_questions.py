@@ -57,7 +57,6 @@ ANSWER_HINTS: list[tuple[str, str]] = [
     ("WHERE\n子句中使用哪一個關鍵字", "d"),
     ("ProductDescription = 'spoon'", "c"),
     ("員工只能被指派到一個現有的部門", "b"),
-    ("Sample Movie是否只在Movie", "d"),
     ("建立預存程序的其中一個原因", "a"),
     ("移除外部索引鍵", "d"),
     ("Category =", "c"),
@@ -79,6 +78,25 @@ ANSWER_HINTS: list[tuple[str, str]] = [
     ("第三正規形式", "c"),
     ("Origin <> 'USA'", "c"),
     ("ChapterLanguage", "b,e"),
+    # 以下為先前因特殊空白字元未能匹配的題目
+    ("DELETE FROM Student 請問", "b"),
+    ("部分資料列的FirstName", "b"),
+    ("OUTER  JOIN  courses", "b"),
+    ("此查詢會傳回錯誤", "b"),
+    ("資料表中的資料列數目", "b"),
+    ("停用User1檢視", "c"),
+    ("FROM Employee, Department", "d"),
+    ("VALUES (3296, 'Table', 4444)", "e"),
+    ("未輸入員工電話號碼", "a"),
+    ("REMOVE SSN", "b"),
+    ("沒有任何訂單的客戶", "b"),
+    ("移除名為EmployeeView", "c"),
+    ("Sample Movie是否只在Movie", "c"),
+    ("Category = 'Science Books'", "c"),
+    ("INSERT INTO Road VALUES (1234, 36)", "a"),
+    ("分機為有效號碼", "d"),
+    ("StudentName必須包含字元字串", "a"),
+    ("名稱包含特定字元", "d"),
 ]
 
 
@@ -325,19 +343,41 @@ def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def normalize_match(text: str) -> str:
+    return re.sub(r"\s+", " ", text.replace("\xa0", " ")).strip()
+
+
 def derive_answer(q: dict) -> str | None:
-    text = q["text"]
-    opts = {o["id"]: o["text"] for o in q["options"]}
+    text = normalize_match(q["text"])
+    opts = {o["id"]: normalize_match(o["text"]) for o in q["options"]}
+    all_text = text + " " + " ".join(opts.values())
 
     # 依選項文字比對（避免選項順序不同導致答案字母錯誤）
     for oid, ot in opts.items():
         if "Cascade Delete" in ot or "串聯刪除" in ot:
             if "自動刪除" in text:
                 return oid
+        if ot.startswith("INSERT INTO AddressInfo ([StreetAddress]"):
+            return oid
+        if "CREATE TABLE Student ( ID INT" in ot:
+            return oid
+        if "LIKE '%Chocolate%'" in ot:
+            return oid
+        if ot == "EmployeeID" and "EmployeeName" in opts.values():
+            return "e"
 
+    best: tuple[tuple[int, int], str] | None = None
     for hint, ans in ANSWER_HINTS:
-        if hint in text:
-            return ans
+        hint_n = normalize_match(hint)
+        in_text = hint_n in text
+        in_all = hint_n in all_text
+        if not in_text and not in_all:
+            continue
+        score = (1 if in_text else 0, len(hint_n))
+        if best is None or score > best[0]:
+            best = (score, ans)
+    if best:
+        return best[1]
 
     if "ALTER TABLE Customer ADD (District INTEGER)" in opts.values():
         return "b"

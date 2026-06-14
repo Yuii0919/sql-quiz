@@ -226,8 +226,10 @@ body {
   border: 2px solid var(--border);
   border-radius: 12px;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s, opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .option input {
@@ -258,11 +260,39 @@ body {
 .option label.correct {
   border-color: var(--success);
   background: #ecfdf5;
+  border-width: 3px;
+  box-shadow: 0 0 0 1px rgba(5, 150, 105, 0.15);
 }
 
 .option label.wrong {
   border-color: var(--error);
   background: #fef2f2;
+  border-width: 3px;
+  box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.15);
+}
+
+.option label.dimmed {
+  opacity: 0.45;
+}
+
+.option-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge-correct {
+  background: var(--success);
+  color: white;
+}
+
+.badge-wrong {
+  background: var(--error);
+  color: white;
 }
 
 .option.multi label.selected {
@@ -278,10 +308,50 @@ body {
 }
 
 .feedback {
-  padding: 14px;
+  padding: 16px;
   border-radius: var(--radius);
   margin-bottom: 12px;
   font-size: 0.925rem;
+}
+
+.feedback-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.feedback-detail {
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.answer-reveal {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.answer-reveal-line {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  word-break: break-word;
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+.answer-reveal-line:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.feedback.wrong .answer-reveal {
+  border-color: #fecaca;
+}
+
+.feedback.correct .answer-reveal {
+  border-color: #a7f3d0;
 }
 
 .feedback.correct {
@@ -331,5 +401,22 @@ body {
 
   .option label.selected {
     background: #1e3a5f;
+  }
+
+  .option label.correct {
+    background: #064e3b;
+  }
+
+  .option label.wrong {
+    background: #450a0a;
+  }
+
+  .answer-reveal {
+    background: rgba(15, 23, 42, 0.5);
+    border-color: var(--border);
+  }
+
+  .answer-reveal-line {
+    border-bottom-color: var(--border);
   }
 }

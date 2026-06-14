@@ -133,9 +133,27 @@ function renderQuestion() {
   $("#feedback").classList.add("hidden");
 }
 
+function getExpectedIds(q) {
+  if (!q.answer) return new Set();
+  return new Set(q.answer.split(",").map((s) => s.trim()));
+}
+
+function getOptionById(q, id) {
+  return q.options.find((o) => o.id === id);
+}
+
+function formatAnswerLines(q) {
+  if (!q.answer) return [];
+  return [...getExpectedIds(q)].map((id) => {
+    const opt = getOptionById(q, id);
+    const letter = id.toUpperCase();
+    return opt ? `${letter}. ${opt.text}` : letter;
+  });
+}
+
 function checkAnswer(q, chosen) {
   if (!q.answer) return null;
-  const expected = new Set(q.answer.split(",").map((s) => s.trim()));
+  const expected = getExpectedIds(q);
   const chosenSet = new Set(chosen);
   if (expected.size !== chosenSet.size) return false;
   for (const c of expected) {
@@ -145,13 +163,74 @@ function checkAnswer(q, chosen) {
 }
 
 function highlightResults(q, chosen) {
-  const expected = q.answer ? new Set(q.answer.split(",").map((s) => s.trim())) : new Set();
+  const expected = getExpectedIds(q);
   document.querySelectorAll(".option input").forEach((input) => {
+    input.disabled = true;
     const label = input.closest("label");
     const id = input.value;
-    if (expected.has(id)) label.classList.add("correct");
-    else if (chosen.has(id)) label.classList.add("wrong");
+    label.classList.remove("correct", "wrong", "missed", "dimmed");
+
+    if (expected.has(id)) {
+      label.classList.add("correct");
+      addOptionBadge(label, "正解", "badge-correct");
+    } else if (chosen.has(id)) {
+      label.classList.add("wrong");
+      addOptionBadge(label, "你的答案", "badge-wrong");
+    } else if (q.answer) {
+      label.classList.add("dimmed");
+    }
   });
+}
+
+function addOptionBadge(label, text, className) {
+  if (label.querySelector(".option-badge")) return;
+  const badge = document.createElement("span");
+  badge.className = `option-badge ${className}`;
+  badge.textContent = text;
+  label.appendChild(badge);
+}
+
+function renderFeedback(q, result, chosen) {
+  const feedback = $("#feedback");
+  feedback.classList.remove("hidden", "correct", "wrong", "neutral");
+  feedback.innerHTML = "";
+
+  if (result === null) {
+    feedback.classList.add("neutral");
+    feedback.innerHTML =
+      '<p class="feedback-title">此題暫無標準答案</p>' +
+      '<p class="feedback-detail">請對照講義或筆記自行確認。</p>';
+    return;
+  }
+
+  const answerLines = formatAnswerLines(q);
+  const reveal = document.createElement("div");
+  reveal.className = "answer-reveal";
+  answerLines.forEach((line) => {
+    const row = document.createElement("div");
+    row.className = "answer-reveal-line";
+    row.textContent = line;
+    reveal.appendChild(row);
+  });
+
+  if (result) {
+    feedback.classList.add("correct");
+    feedback.innerHTML = '<p class="feedback-title">✓ 答對了！</p>';
+    if (answerLines.length) {
+      const detail = document.createElement("p");
+      detail.className = "feedback-detail";
+      detail.textContent = "正確答案：";
+      feedback.append(detail, reveal);
+    }
+  } else {
+    feedback.classList.add("wrong");
+    feedback.innerHTML =
+      '<p class="feedback-title">✗ 答錯了</p>' +
+      '<p class="feedback-detail">正確答案如下（選項已標示綠色「正解」、紅色「你的答案」）：</p>';
+    feedback.append(reveal);
+  }
+
+  feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function recordProgress(qid, isCorrect) {
@@ -166,29 +245,11 @@ function submitAnswer() {
   answered = true;
 
   const q = queue[currentIndex];
-  const chosen = [...selected];
-  const result = checkAnswer(q, chosen);
-  const feedback = $("#feedback");
+  const result = checkAnswer(q, [...selected]);
 
   highlightResults(q, selected);
-  feedback.classList.remove("hidden", "correct", "wrong", "neutral");
-
-  if (result === null) {
-    feedback.classList.add("neutral");
-    feedback.textContent = "此題暫無標準答案，請對照講義確認。";
-    recordProgress(q.id, false);
-  } else if (result) {
-    feedback.classList.add("correct");
-    feedback.textContent = "答對了！";
-    recordProgress(q.id, true);
-  } else {
-    feedback.classList.add("wrong");
-    const ansText = q.answer
-      ? q.answer.toUpperCase().split(",").join("、")
-      : "";
-    feedback.textContent = `答錯了。正確答案：${ansText}`;
-    recordProgress(q.id, false);
-  }
+  renderFeedback(q, result, selected);
+  recordProgress(q.id, result === true);
 
   $("#btn-submit").classList.add("hidden");
   $("#btn-next").classList.remove("hidden");
