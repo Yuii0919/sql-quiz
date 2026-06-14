@@ -1,0 +1,2067 @@
+{
+  "title": "SQL 資料庫練習題",
+  "total": 73,
+  "questions": [
+    {
+      "id": 1,
+      "text": "請問哪一個陳述式會建立複合索引鍵？",
+      "options": [
+        {
+          "id": "a",
+          "text": "CREATE TABLE Order (OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY)"
+        },
+        {
+          "id": "b",
+          "text": "CREATE TABLE Order (OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY(OrderID,OrderItemId))"
+        },
+        {
+          "id": "c",
+          "text": "CREATE TABLE Order (OrderID INTEGER PRIMARY KEY, OrderItemID INTEGER PRIMARY KEY)"
+        },
+        {
+          "id": "d",
+          "text": "CREATE TABLE Order (OrderID INTEGER, OrderItemID INTEGER, PRIMARY KEY OrderID, PRIMARY KEY OrderItemID)"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 2,
+      "text": "您刪除了Order資料表中的資料列。OrderItem資料表中的對應資料列也被自動刪除了。",
+      "options": [
+        {
+          "id": "a",
+          "text": "繼承法刪除(Inherited Delete)"
+        },
+        {
+          "id": "b",
+          "text": "函式法刪除(Functional Delete)"
+        },
+        {
+          "id": "c",
+          "text": "瀑布法刪除(Waterfall Delete)"
+        },
+        {
+          "id": "d",
+          "text": "串聯刪除(Cascade Delete)"
+        },
+        {
+          "id": "e",
+          "text": "骨牌法刪除(Domino Delete)"
+        }
+      ],
+      "answer": "d",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 3,
+      "text": "您有一個名為Customer的資料表。您需要建立一個名為District的新資料行，請問您應該使用哪一個陳述式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "ALTER TABLE Customer MODIFY (District INTEGER)"
+        },
+        {
+          "id": "b",
+          "text": "ALTER TABLE Customer ADD (District INTEGER)"
+        },
+        {
+          "id": "c",
+          "text": "ALTER TABLE Customer ADD (INTEGER District)"
+        },
+        {
+          "id": "d",
+          "text": "MODIFY TABLE Customer ADD (INTEGER District)"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 4,
+      "text": "您有一個名為Product的資料表。您建立了一個檢視表，其中包含Product資料表中屬於Furniture類別的所有產品。",
+      "options": [
+        {
+          "id": "a",
+          "text": "您針對Product資料表執行一個陳述式來刪除屬於Furniture類別的所有產品。"
+        },
+        {
+          "id": "b",
+          "text": "在您執行該陳述式之後，檢視表的結果集將："
+        },
+        {
+          "id": "c",
+          "text": "被刪除。"
+        },
+        {
+          "id": "d",
+          "text": "保持不變。"
+        },
+        {
+          "id": "e",
+          "text": "清空。"
+        },
+        {
+          "id": "f",
+          "text": "被封存。"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 5,
+      "text": "對於下列每一項敘述，若[正確]為O，[錯誤]為X。\n                \n1.您可以使用預存程序來刪除資料。\n                \n2.函式必須具有傳回值\n                \n3.預存程序必須具有傳回值。",
+      "options": [
+        {
+          "id": "a",
+          "text": "O、O、O"
+        },
+        {
+          "id": "b",
+          "text": "O、X、O"
+        },
+        {
+          "id": "c",
+          "text": "X、O、O"
+        },
+        {
+          "id": "d",
+          "text": "O、O、X"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 6,
+      "text": "請問哪一個查詢會傳回除了加州(CA)以外，其他所有州在2017年1月之後提交訂單的結果集？",
+      "options": [
+        {
+          "id": "a",
+          "text": "SELECT * FROM orders WHERE order_date ＞ '2017-01-01' OR ship_state ＜＞ 'CA'"
+        },
+        {
+          "id": "b",
+          "text": "SELECT * FROM orders WHERE order_date ＞ '2017-01-01' AND ship_state ＜＞ 'CA'"
+        },
+        {
+          "id": "c",
+          "text": "SELECT * FROM orders WHERE order_date ＞ '2017-01-01' AND ship_state LIKE 'CA'"
+        },
+        {
+          "id": "d",
+          "text": "SELECT * FROM orders WHERE order_date ＞ '2017-01-01' OR ship_state LIKE 'CA'"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 7,
+      "text": "函式與預存程序之間的其中一項差異在於，函式：",
+      "options": [
+        {
+          "id": "a",
+          "text": "無法接受參數。"
+        },
+        {
+          "id": "b",
+          "text": "必須傳回值。"
+        },
+        {
+          "id": "c",
+          "text": "無法包含交易。"
+        },
+        {
+          "id": "d",
+          "text": "必須由觸發程序呼叫。"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 8,
+      "text": "請問哪一個SQL陳述式會傳回訂單數目少於50的國家/地區以及各國家/地區的訂單數目?\norderID代表個別訂單、Country代表國家/地區，而Orders代表單數目。",
+      "options": [
+        {
+          "id": "a",
+          "text": "SELECT Country, orderID FROM Orders WHERE COUNT(orderID) ＜ 50 GROUP BY Country;"
+        },
+        {
+          "id": "b",
+          "text": "SELECT COUNT(orderID), Country FROM Orders GROUP BY Country HAVING COUNT(orderID) ＜ 50;"
+        },
+        {
+          "id": "c",
+          "text": "SELECT Country, orderID FROM Orders GROUP BY Country WHERE COUNT(orderID) ＜50;"
+        },
+        {
+          "id": "d",
+          "text": "SELECT COUNT(orderID), Country FROM Orders HAVING COUNT(orderID) ＜ 50 GROUP BY Country;"
+        }
+      ],
+      "answer": "d",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 9,
+      "text": "另一位開發人員嘗試使用下列查詢，在資料表中新增一個名為Prefix的資料行：\n                \nALTER TABLE Person ADD Prefix varchar(4) NOT NULL；\n                \n這位開發人員在執行查詢之後收到錯誤訊息。但是，這位開發人員無法記住確切的錯誤訊息。\n                \n請問這個問題的可能原因為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "應該使用DEFAULT關鍵字定設值。"
+        },
+        {
+          "id": "b",
+          "text": "Person資料表是空的。"
+        },
+        {
+          "id": "c",
+          "text": "varchar(4)資料類型不適用於Person 資料表。"
+        },
+        {
+          "id": "d",
+          "text": "您應該先執行DROP CONSTRAINT查詢，再執行ALTER TABLE查詢。"
+        }
+      ],
+      "answer": "a",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 10,
+      "text": "某個資料表有一個叢集索引。\n對於下列每一項敘述，請選取正確答案。\n1. 叢集索引可提升以下查詢的效能：\nA.傳回大型結果集\nB.傳回許多資料行\nC.不使用ORDERBY 或GROUP BY 子句\n2.叢集索引可提升以下資料行查詢的效能：\nA.隨機存取\nB.循序存取\nC.並非唯一或包含許多共同的值\n請問答案順序為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "A、C"
+        },
+        {
+          "id": "b",
+          "text": "A、B"
+        },
+        {
+          "id": "c",
+          "text": "B、A"
+        },
+        {
+          "id": "d",
+          "text": "B、B"
+        },
+        {
+          "id": "e",
+          "text": "C、A"
+        },
+        {
+          "id": "f",
+          "text": "C、B"
+        }
+      ],
+      "answer": "a",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 11,
+      "text": "請問哪一個陳述式會從資料表中移除所有資料列，但不記錄個別資料列刪除動作？",
+      "options": [
+        {
+          "id": "a",
+          "text": "ALTER TABLE"
+        },
+        {
+          "id": "b",
+          "text": "DROP TABLE"
+        },
+        {
+          "id": "c",
+          "text": "TRUNCATE TABLE"
+        },
+        {
+          "id": "d",
+          "text": "CREATE TABL"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 12,
+      "text": "您正在設定關聯式資料庫中某個資料表的結構。\n                \n對於下列每一項敘述，請選取[正確]為或O[錯誤]為X。\n                \n1.資料表中欄位的每個值都必須是唯一的。\n                \n2.資料表中的每個資料列都必須是唯一的。\n                \n3.資料表中的每個資料行名稱都必須是唯一的。",
+      "options": [
+        {
+          "id": "a",
+          "text": "O、O、O"
+        },
+        {
+          "id": "b",
+          "text": "O、X、O"
+        },
+        {
+          "id": "c",
+          "text": "X、O、O"
+        },
+        {
+          "id": "d",
+          "text": "O、O、X"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 13,
+      "text": "您需要設定一個資料庫來提供北美哺乳動物的檢視表(NorthAmercanMammals_View)：\n1\n2\n3\nWHERE a.Class = 'Mammals'\nAND a.InNorthAmerica = 1\n請將下方A~F的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次，也可能使用多次，甚至完全用不到。\nA.  CREATE VIEW [dbo].[NorthAmericanMammals_View]\nB. INSERT VIEW [dbo].[NorthAmericanMammals_View]\nC. AS JOIN a.Id, a.Name\nD. AS SELECT  a.Id, a.Name\nE. FROM Animal a\nF. JOIN Animal a\n請問填入的程式碼片段順序為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "A、C、F"
+        },
+        {
+          "id": "b",
+          "text": "A、D、E"
+        },
+        {
+          "id": "c",
+          "text": "B、D、E"
+        },
+        {
+          "id": "d",
+          "text": "B、C、F"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 14,
+      "text": "您需要將兩個查詢的結果結合成單一結果，而且包含這兩個查詢中的所有資料列。\n請問您應該使用哪一個SQL陳述式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "EXCEPT"
+        },
+        {
+          "id": "b",
+          "text": "UNION"
+        },
+        {
+          "id": "c",
+          "text": "JOIN"
+        },
+        {
+          "id": "d",
+          "text": "TRUNCATE"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 15,
+      "text": "請問哪一個SQL陳述式是資料操語言(DML)陳述式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "SELECT * INTO Employee FROM NewHires"
+        },
+        {
+          "id": "b",
+          "text": "INSERT INTO Employee VALUES (' Jack Smith');"
+        },
+        {
+          "id": "c",
+          "text": "SELECT EmployeeName FROM Employee WHERE EmployeeName = 'Jack Smith';"
+        },
+        {
+          "id": "d",
+          "text": "ALTER TABLE Employee ADD EmployeeName Varchar;"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 16,
+      "text": "您有一個名為Student的資料表，其中包含100個料列。部分資料列的FirstName 資料行具有NULL值。\n您執行了下列陳述式：\nDELETE FROM  Student\n請問結果為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "系統將刪除所有資料列和資料表定義。"
+        },
+        {
+          "id": "b",
+          "text": "系統將刪除資料表中的所有資料列。"
+        },
+        {
+          "id": "c",
+          "text": "您會收到錯誤訊息。"
+        },
+        {
+          "id": "d",
+          "text": "系統將刪除FirstName資料行含有NULL值的所有資料列。"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 17,
+      "text": "您有兩個資料表。每個資料表都有三個資料列。您建立了一個使用交叉聯結的SQL查詢。這個查詢不包含WHERE子句。\n請問這兩個資料表的笛卡兒乘積會包含多少個資料列？",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "text": "9"
+        }
+      ],
+      "answer": "d",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 18,
+      "text": "您需要針對students資料表建立一份報表。此報表必須符合下列需求：\n顯示在2020年6月1日當天或之後註冊的所有學生。\n顯示在2020年畢業的所有學生。\n按照註冊順序傅回結果集，最新的註冊日期列在第一個。\nenrollment_date會指定註冊日期。graduation_date指定畢業日期。如果acadmics_status為Graduated，就表示學生已畢業。\n請問您應該使用哪一個查詢？",
+      "options": [
+        {
+          "id": "a",
+          "text": "SELECT * FROM students WHERE enrollment_date ＞= '2020-06-01' AND academic_status='Graduated' AND graduation_date ＞= '2020-01-01' ORDER BY enrollment_date ASC"
+        },
+        {
+          "id": "b",
+          "text": "SELECT * FROM students WHERE enrollment date ＞= '2020-06-01' AND academic status='Graduated' OR graduation date ＞= '2020-01-01' ORDER BY enrollment_date"
+        },
+        {
+          "id": "c",
+          "text": "SELECT * FROM students WHERE enrollment_date ＞= '2020-06-01' OR academic_status='Graduated' AND graduation_date ＞= '2020-01-01' ORDER BY enrollment_date DESC"
+        },
+        {
+          "id": "d",
+          "text": "SELECT * FROM students WHERE enrollment_date ＞= '2020-06-01' OR academic_status='Graduated' OR graduation_date ＞= '2020-01-01' ORDER BY enrollment_date DESC"
+        }
+      ],
+      "answer": "a",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 19,
+      "text": "您有兩個資料表，分別名為SalesPerson與Sales\n您需要確保Sales資料表中的每筆記錄都在SalesPerson資料表中保存有效的相關聯銷售人員記錄。\n請問您應該將哪一個資料庫物件新增至Sales資料表？",
+      "options": [
+        {
+          "id": "a",
+          "text": "主索引鍵"
+        },
+        {
+          "id": "b",
+          "text": "外部索引鍵"
+        },
+        {
+          "id": "c",
+          "text": "叢集索引"
+        },
+        {
+          "id": "d",
+          "text": "非叢集索引"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 20,
+      "text": "您是某間大學的資料庫管理員，該大學將學生資訊儲存在一個名為students的資料中。這個資料表具有一個名courseID的外部索引鍵，可連結courses資料表中的主索引鍵。\n您需要使用這兩個根據courseID配對的資料表來傳回學生姓名和課程名稱。\n您執行了下列查詢：\nSELECT  students.name,  courses.name  FROM  students\nOUTER  JOIN  courses  WHERE  student.courseID  =  courses.courseID\n此查詢會傳回錯誤。\n請問您該如何修正查詢？",
+      "options": [
+        {
+          "id": "a",
+          "text": "SELECT students.name, courses.name FROM students INNER JOIN courses WHERE students.courseID = courses.courseID"
+        },
+        {
+          "id": "b",
+          "text": "SELECT students.name, courses.name FROM students INNER JOIN courses ON students.courseID = courses.courseID"
+        },
+        {
+          "id": "c",
+          "text": "SELECT students.name, courses.name FROM students INNER JOIN ON courses WHERE students.courseID = courses.courseID"
+        },
+        {
+          "id": "d",
+          "text": "SELECT students.name, courses.name FROM students INNER JOIN ON students.courseID = courses.courseID"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 21,
+      "text": "請問關聯式資料庫會使用哪一項功能來確保輸入資料行中的資料正確？",
+      "options": [
+        {
+          "id": "a",
+          "text": "屬性"
+        },
+        {
+          "id": "b",
+          "text": "主索引鍵"
+        },
+        {
+          "id": "c",
+          "text": "條件約束"
+        },
+        {
+          "id": "d",
+          "text": "索引"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 22,
+      "text": "有一個預存程序包含以下查詢：\n                \nSELECT 'Greetings ' + Prefix + '   ' + FirstName FROM Person;\n                \n此預存程序會傳回所有null值。您確認Person資料表包含資料 。\n                \n請問這個問題的可能原因為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "您必須在查詢中指定NULLIF關鍵字。"
+        },
+        {
+          "id": "b",
+          "text": "Prefix或FirstName資料行具有null值。"
+        },
+        {
+          "id": "c",
+          "text": "您必須在SELECT陳述式中指定JOIN 關鍵字。"
+        },
+        {
+          "id": "d",
+          "text": "加(+)算子無法用來附加字元資料。"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 23,
+      "text": "您有一個名為Employee的資料表，其中包含下列資料行：\n                \nEmployeeID\n                \nEmployeeName\n                \n請問您應該使用哪一個陳述式來傳回資料表中的資料列數目?",
+      "options": [
+        {
+          "id": "a",
+          "text": "SELECT * FROM Employee"
+        },
+        {
+          "id": "b",
+          "text": "SELECT COUNT(*) FROM Employee"
+        },
+        {
+          "id": "c",
+          "text": "SELECT SUM(*) FROM Employee"
+        },
+        {
+          "id": "d",
+          "text": "SELECT COUNT(rows) FROM Employee"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 24,
+      "text": "您的資料庫包含一個名為 Customer的資料表。您需要從Customer 資料表中刪除CustomerID為12345記錄。\n                \n請問您應該使用哪一個陳述式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "DELETE CustomerID FROM Customer WHERE CustomerID = 12345"
+        },
+        {
+          "id": "b",
+          "text": "UPDATE Customer DELETE * WHERE CustomerID = 12345"
+        },
+        {
+          "id": "c",
+          "text": "UPDATE CustomerID FROM Customer DELETE * WHERE CustomerID = 12345"
+        },
+        {
+          "id": "d",
+          "text": "DELETE FROM Customer WHERE CustomerID = 12345"
+        }
+      ],
+      "answer": "d",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 25,
+      "text": "您在某間咖啡廳工作。公司要求您設定網站來儲存購物費用。\n您需要建議公司在資料庫資料表中使用某種資料類型，以便根據收費金額執行財務函式。\n請問您應該建議使用哪一種資料類型？",
+      "options": [
+        {
+          "id": "a",
+          "text": "bit"
+        },
+        {
+          "id": "b",
+          "text": "decimal"
+        },
+        {
+          "id": "c",
+          "text": "binary"
+        },
+        {
+          "id": "d",
+          "text": "varchar"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 26,
+      "text": "請問哪一個關鍵字會結合兩個查詢的結果並且僅傳回兩個結果集都有出現的資料列？",
+      "options": [
+        {
+          "id": "a",
+          "text": "UNION"
+        },
+        {
+          "id": "b",
+          "text": "INTERSECT"
+        },
+        {
+          "id": "c",
+          "text": "ALL"
+        },
+        {
+          "id": "d",
+          "text": "JOIN"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 27,
+      "text": "您需要停用User1檢視Customer資料表中資料的存取權。\n                \n請問您應該使用哪一個陳述式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "REVOKE User1 FROM Customer"
+        },
+        {
+          "id": "b",
+          "text": "REMOVE User1 FROM Customer"
+        },
+        {
+          "id": "c",
+          "text": "REVOKE SELECT ON Customer FROM User1"
+        },
+        {
+          "id": "d",
+          "text": "REMOVE SELECT ON Customer FROM User1"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 28,
+      "text": "您執行了下列查詢：\n                \nSELECT EmployeeID, FirstName, DepartmentName\n                \nFROM Employee, Department\n                \n這種作業稱為：",
+      "options": [
+        {
+          "id": "a",
+          "text": "等聯結。"
+        },
+        {
+          "id": "b",
+          "text": "交集。"
+        },
+        {
+          "id": "c",
+          "text": "外部聯結。"
+        },
+        {
+          "id": "d",
+          "text": "笛卡兒乘積。"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 29,
+      "text": "函式與預存程序之間的其中一項差異在於，函式：\n無法接受參數。",
+      "options": [
+        {
+          "id": "a",
+          "text": "必須傳回值。"
+        },
+        {
+          "id": "b",
+          "text": "無法包含交易。"
+        },
+        {
+          "id": "c",
+          "text": "必須由觸發程序呼叫。"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 30,
+      "text": "您有一個名為Product的資料表包含以下資料。\nProductID\nProductName\nCategoryID\n3296\nSpoon\n2222\n1114\nChair\n4444\nProductID 資料行是主索引鍵。CategoryID資料行是名為Category之個別資料表的外部索引鍵。\n您執行了下列陳述式:\nINSERT  INTO  Product\nVALUES (3296, 'Table', 4444)\n請問結果為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "語法錯誤"
+        },
+        {
+          "id": "b",
+          "text": "Category資料表中的新資料列"
+        },
+        {
+          "id": "c",
+          "text": "外部索引鍵條件約束違規"
+        },
+        {
+          "id": "d",
+          "text": "Product資料表中的新資料列"
+        },
+        {
+          "id": "e",
+          "text": "主索引鍵條件約束違規"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 31,
+      "text": "您有一個資料庫資料表包含以下資料行，詳見下方附圖。\n您必須在資料表中插入下列記錄：",
+      "options": [
+        {
+          "id": "a",
+          "text": "StreetAddress"
+        },
+        {
+          "id": "b",
+          "text": "City"
+        },
+        {
+          "id": "c",
+          "text": "State"
+        },
+        {
+          "id": "d",
+          "text": "PostalCode"
+        },
+        {
+          "id": "e",
+          "text": "Dallas"
+        },
+        {
+          "id": "f",
+          "text": "TX"
+        },
+        {
+          "id": "g",
+          "text": "INSERT INTO AddressInfo ('1234 Main Street', 'Dallas', 'TX', '75201') VALUES ([StreetAddress], [City], [State], [PostalCode])"
+        },
+        {
+          "id": "h",
+          "text": "INSERT INTO AddressInfo ([StreetAddress], [City], [State], [PostalCode]) VALUES ('1234 Main Street', 'Dallas', 'TX', '75201')"
+        },
+        {
+          "id": "i",
+          "text": "UPDATE AddressInfo SET [StreetAddress] = '1234 Main Street', [City] = 'Dallas', [State] = 'TX', [PostalCode] = '75201'"
+        },
+        {
+          "id": "j",
+          "text": "INSERT INTO AddressInfo VALUES ('1234 Main Street', 'Dallas', 'TX', '75201')"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": true
+    },
+    {
+      "id": 32,
+      "text": "您正在建立一個名為Student的資料庫物件來儲存以下資料：",
+      "options": [
+        {
+          "id": "a",
+          "text": "ID"
+        },
+        {
+          "id": "b",
+          "text": "Name"
+        },
+        {
+          "id": "c",
+          "text": "Age"
+        },
+        {
+          "id": "d",
+          "text": "Rene"
+        },
+        {
+          "id": "e",
+          "text": "Tia"
+        },
+        {
+          "id": "f",
+          "text": "Oliver"
+        },
+        {
+          "id": "g",
+          "text": "請問您應該使用哪一個語法來建立物件？"
+        },
+        {
+          "id": "h",
+          "text": "CREATE TABLE Student ( ID INT, Name VARCHAR (100), Age INT)"
+        },
+        {
+          "id": "i",
+          "text": "CREATE TABLE ( ID INT, Name VARCHAR (100), Age INT)"
+        },
+        {
+          "id": "j",
+          "text": "CREATE Student ( ID INT, Name VARCHAR (100), Age INT)"
+        },
+        {
+          "id": "k",
+          "text": "CREATE ( TABLE Student ID INT, Name VARCHAR (100), Age INT)"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 33,
+      "text": "您有一個資料表包含以下資料。\nProductID\nProductCategory\n32\nbooks\n25\nbooks\n67\nmovies\n89\nmovies\n請問哪一個資料庫詞彙是用來描述ProductID與ProductCategory之間的關聯性？",
+      "options": [
+        {
+          "id": "a",
+          "text": "功能相依"
+        },
+        {
+          "id": "b",
+          "text": "關聯相依"
+        },
+        {
+          "id": "c",
+          "text": "決定性"
+        },
+        {
+          "id": "d",
+          "text": "世代"
+        },
+        {
+          "id": "e",
+          "text": "複合"
+        }
+      ],
+      "answer": "a",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 34,
+      "text": "您建立了下列名為LoanedBooks的資料表，其中列出您借給朋友的書籍數目。",
+      "options": [
+        {
+          "id": "a",
+          "text": "ID"
+        },
+        {
+          "id": "b",
+          "text": "Name"
+        },
+        {
+          "id": "c",
+          "text": "City"
+        },
+        {
+          "id": "d",
+          "text": "Books"
+        },
+        {
+          "id": "e",
+          "text": "Harry"
+        },
+        {
+          "id": "f",
+          "text": "Sally"
+        },
+        {
+          "id": "g",
+          "text": "Sue"
+        },
+        {
+          "id": "h",
+          "text": "Chicago"
+        },
+        {
+          "id": "i",
+          "text": "Harry"
+        },
+        {
+          "id": "j",
+          "text": "William"
+        },
+        {
+          "id": "k",
+          "text": "Detroit"
+        },
+        {
+          "id": "l",
+          "text": "請問哪一個陳述式可正確更新您的資料表？"
+        },
+        {
+          "id": "m",
+          "text": "UPDATE LoanedBooks SET Books = 0 WHERE (Name = 'Harry' OR City = 'San Francisco')"
+        },
+        {
+          "id": "n",
+          "text": "UPDATE LoanedBooks SET Books = 0 WHERE (Name = 'Harry' AND City = 'San Francisco')"
+        },
+        {
+          "id": "o",
+          "text": "UPDATE LoanedBooks SET Books = 0 WHERE (Name In 'Harry', 'San Francisco')"
+        },
+        {
+          "id": "p",
+          "text": "INSERT INTO LoanedBooks SET Books = 0 WHERE ID = 4"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 35,
+      "text": "有一個名為Flight的資料表包含以下欄位：\n欄位\n資料類型\n允許Null\nID\nINT\nFALSE\nFlightNumber\nVARCHAR(8)\nFALSE\nOriginAirport\nCHAR(3)\nFALSE\nDestinationAirport\nCHAR(3)\nFALSE\nDepartureTime\nDATETIME\nFALSE\nArrivalTime\nDATETIME\nFALSE\n您需要顯示今天稍晚抵達美國紐約拉瓜迪亞機場(LGA)之所有航班的航班號碼。結果應該依照最近的抵達時間來排序，程式碼如下：\nSELECT FlightNumber FROM Flight\nWHERE DestinationAirport = 'LGA'        1\nArrivalTime        2        GETDATE(  )\n3               4\n請將下方A~G的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次，也可能使用多次，甚至完全用不到。\n請問填入的程式碼片段順序為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "(A) OR       (B) AND"
+        },
+        {
+          "id": "b",
+          "text": "(A) <          (B) >        (C) ="
+        },
+        {
+          "id": "c",
+          "text": "(A) GROUP BY          (B) ORDER BY"
+        },
+        {
+          "id": "d",
+          "text": "(A) ArrivalTime ASC    (B) ArrivalTime DESC"
+        },
+        {
+          "id": "e",
+          "text": "B、B、B、B"
+        },
+        {
+          "id": "f",
+          "text": "A、A、A、A"
+        },
+        {
+          "id": "g",
+          "text": "A、A、B、B"
+        },
+        {
+          "id": "h",
+          "text": "B、B、A、A"
+        }
+      ],
+      "answer": "d",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 36,
+      "text": "有一個名為PlayerStat的資料表包含以下欄位：\n欄位\n資料類型\n允許Null\nPlayerID\nINT\nFALSE\nTeamID\nINT\nFALSE\nGameDate\nDATETIME\nTRUE\nPoints\nINT\nTRUE\n您需要針對TeamID為1的隊伍顯示每位隊員的總分數，程式碼如下：\nSELECT  PlayerID,         1\nFROM  PlayerStat\n2         TeamID  =  1\n3               4\n請將下方A~G的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次，也可能使用多次，甚至完全用不到。\nA. PlayerlD    B. COUNT   C. GROUP BY\nD. TeamID       E. WHERE   F.  SUM(Points)\nG. HAVING\n請問填入的程式碼片段順序為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "F、C、D、B"
+        },
+        {
+          "id": "b",
+          "text": "D、C、E、F"
+        },
+        {
+          "id": "c",
+          "text": "F、E、C、A"
+        },
+        {
+          "id": "d",
+          "text": "B、E、F、D"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 37,
+      "text": "您接受了某間地方慈善機構的IT實習工作。該慈善機構的資料模型有兩個資料表，名為 Chapter和Language，如下所示。\nChapter資料表\nChapterId\nCity\nRegion\nCountry\n1\nChicago\nIllinois\nUSA\n2\nLos Angeles\nCalifornia\nUSA\n3\nNew York City\nNew York\nUSA\n4\nToronto\nOntario\nCanada\nLanguage 資料表\nLanguageId\nLanguageName\nLocale\n1\nEnglish\nUSA\n2\nEnglish\nCanada\n3\nSpanish\nSpain\n4\nSpanish\nMexico\n5\nFrench\nFrance\n5\nFrench\nCanada\n6\nGerman\nGermany\n您建立了名為ChapterLanguage的第三個資料表來關聯Chapter資料表和Language 資料表。\n您需要從Chapter和Language 資料表中選取資料行，以便為ChapterLanguage資料表建立複合主索引鍵。\n請問您應該選取哪兩個資料行？(請選擇2個答案。)",
+      "options": [
+        {
+          "id": "a",
+          "text": "City"
+        },
+        {
+          "id": "b",
+          "text": "LanguageId"
+        },
+        {
+          "id": "c",
+          "text": "Country"
+        },
+        {
+          "id": "d",
+          "text": "ChapterId"
+        },
+        {
+          "id": "e",
+          "text": "Region"
+        },
+        {
+          "id": "f",
+          "text": "LanguageName"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 38,
+      "text": "Products資料表包含以下資料：",
+      "options": [
+        {
+          "id": "a",
+          "text": "ItemNumber"
+        },
+        {
+          "id": "b",
+          "text": "ItemName"
+        },
+        {
+          "id": "c",
+          "text": "ItemDescription"
+        },
+        {
+          "id": "d",
+          "text": "Price"
+        },
+        {
+          "id": "e",
+          "text": "Bites"
+        },
+        {
+          "id": "f",
+          "text": "Cappuccino"
+        },
+        {
+          "id": "g",
+          "text": "Companion"
+        },
+        {
+          "id": "h",
+          "text": "Collection"
+        },
+        {
+          "id": "i",
+          "text": "Assortment"
+        },
+        {
+          "id": "j",
+          "text": "SELECT ItemName, Price FROM Products WHERE ItemDescription = 'Chocolate';"
+        },
+        {
+          "id": "k",
+          "text": "SELECT ItemName, Price FROM Products WHERE ItemDescription LIKE 'Chocolate';"
+        },
+        {
+          "id": "l",
+          "text": "SELECT ItemName, Price FROM Products WHERE ItemDescription IN '%Chocolate%';"
+        },
+        {
+          "id": "m",
+          "text": "SELECT ItemName, Price FROM Products WHERE ItemDescription LIKE '%Chocolate%';"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 39,
+      "text": "您建立了下列資料表，其中顯示過去寵物表演的獲勝者。\n寵物比賽獲勝者\nID\nEvent\nYear\nPetID\nBirthdate\nCity\n1\nCutest Pet Fest\n2009\nRG459\n23-Jun-08\nChicago\n2\nPet Babies Invitational\n2010\nSP372\nAugust 12,2009\nMontreal\n3\nAdorable Friends\n2011\nBD116\nMay 1,2010\nAtlanta\n4\nAWHH Fest 2012\n2012\nFD228\nAugust 12,2009\nDetroit\n請問哪一個資料行可防止資料表成為第三正規形式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "Year"
+        },
+        {
+          "id": "b",
+          "text": "ID"
+        },
+        {
+          "id": "c",
+          "text": "Birthdate"
+        },
+        {
+          "id": "d",
+          "text": "PetID"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 40,
+      "text": "有一個名為Cars的資料庫資料表,其義下所。\nType\nColor\nOrigin\nSedan\nRed\nJapan\nTruck\nRed\nUSA\nMinivan\nSilver\nJapan\nHatchback\nRed\nJapan\nCompact\nBlack\nJapan\nSUV\nSilver\nGermany\nConvertible\nBlack\nUSA\nHybrid\nBlack\nGermany\n您設有下列SQL述式：\nSELECT *\nFROM Cars    c\nWHERE c. Origin <> 'USA' AND c.Color < > 'Black'\n請問此SQL陳述式會傳回多少個資料列？",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "text": "7"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 41,
+      "text": "您有一個名為Employee的資料表，其中包含下列資料行：",
+      "options": [
+        {
+          "id": "a",
+          "text": "EmployeeID"
+        },
+        {
+          "id": "b",
+          "text": "EmployeeName"
+        },
+        {
+          "id": "c",
+          "text": "請問您應該使用哪一個陳述式來傳回資料表中的資料列數目?"
+        },
+        {
+          "id": "d",
+          "text": "SELECT * FROM Employee"
+        },
+        {
+          "id": "e",
+          "text": "SELECT COUNT(*) FROM Employee"
+        },
+        {
+          "id": "f",
+          "text": "SELECT SUM(*) FROM Employee"
+        },
+        {
+          "id": "g",
+          "text": "SELECT COUNT(rows) FROM Employee"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 42,
+      "text": "您接受了某間地方慈機構的IT實習工作。該慈機構要求您使用一個名為Volunteer的資料庫資料表來保留志工的記錄。這個資料表包含以下資料行和資料列：",
+      "options": [
+        {
+          "id": "a",
+          "text": "ID"
+        },
+        {
+          "id": "b",
+          "text": "GivenName"
+        },
+        {
+          "id": "c",
+          "text": "Tia"
+        },
+        {
+          "id": "d",
+          "text": "Susana"
+        },
+        {
+          "id": "e",
+          "text": "Joey"
+        },
+        {
+          "id": "f",
+          "text": "UPDATE Volunteer SET GivenName = 'Kimberly' WHERE GivenName = 'Tia'"
+        },
+        {
+          "id": "g",
+          "text": "UPDATE GivenName = 'Kimberly' FROM Volunteer WHERE GivenName = 'Tia'"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 43,
+      "text": "您需要將資料庫正規化為第一正規形式。\n                \n請問您必須符合哪兩項需求？(請選擇2個答案。)",
+      "options": [
+        {
+          "id": "a",
+          "text": "排除外部索引鍵。"
+        },
+        {
+          "id": "b",
+          "text": "排除重複資料列。"
+        },
+        {
+          "id": "c",
+          "text": "排除複合索引鍵。"
+        },
+        {
+          "id": "d",
+          "text": "排除重複群組。"
+        }
+      ],
+      "answer": "b,d",
+      "multi": true,
+      "hasImage": false
+    },
+    {
+      "id": 44,
+      "text": "請問哪一個陳述式會刪除未輸入員工電話號碼的資料列？",
+      "options": [
+        {
+          "id": "a",
+          "text": "DELETE FROM Employee WHERE Phone IS NULL"
+        },
+        {
+          "id": "b",
+          "text": "DELETE FROM Employee WHERE Phone IS NOT NULL"
+        },
+        {
+          "id": "c",
+          "text": "DELETE FROM Employee WHERE Phone = NULLABLE"
+        },
+        {
+          "id": "d",
+          "text": "DELETE FROM Employee WHERE Phone = NULL"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 45,
+      "text": "您執行了交易內的陳述式，以便從資料表中刪除100個資料列。僅刪除40個資料列之後，交易便失敗。\n                \n請問資料庫的結果為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "資料表將損毀。"
+        },
+        {
+          "id": "b",
+          "text": "交易將重新啟動。"
+        },
+        {
+          "id": "c",
+          "text": "系統將從資料表中刪除40個資料列"
+        },
+        {
+          "id": "d",
+          "text": "系統不會從資料表中刪除任何資料列。"
+        }
+      ],
+      "answer": "d",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 46,
+      "text": "請問哪一個查詢會正確傳回ship_state不含德州(TX)和亞利桑那州(AZ)之所有訂單的結果集？",
+      "options": [
+        {
+          "id": "a",
+          "text": "SELECT * FROM Orders WHERE NOT ship_state = 'TX' AND NOT ship_state = 'AZ';"
+        },
+        {
+          "id": "b",
+          "text": "SELECT * FROM Orders WHERE ship_state NOT = 'TX' OR ship_state NOT = 'AZ';"
+        },
+        {
+          "id": "c",
+          "text": "SELECT * FROM Orders WHERE ship_state NOT = 'TX' AND ship_state NOT= 'Z';"
+        },
+        {
+          "id": "d",
+          "text": "SELECT * FROM Orders WHERE NOT ship_state = 'TX' OR NOT ship_state = 'AZ';"
+        }
+      ],
+      "answer": "a",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 47,
+      "text": "您有一個名為Customer 的資料表，其中包含名為CustomerID、FirstName和DateJoined的資料列。CustomerID是主索引鍵。\n                \n您執行了下列查詢：\n                \nSELECT  CustomerID,  FirstName,  DateJoined\n                \nFROM  Customer\n                \n請問結果集會以哪種方式組織資料列？",
+      "options": [
+        {
+          "id": "a",
+          "text": "按照Firstame 的字母順序"
+        },
+        {
+          "id": "b",
+          "text": "按照插入資料列的順序"
+        },
+        {
+          "id": "c",
+          "text": "按照無法預測的順序"
+        },
+        {
+          "id": "d",
+          "text": "按照DateJoined的時間順序"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 48,
+      "text": "您撰寫了一系列執行冗長複雜查詢的SQL陳述式。這些陳述式會透過電子郵件傅送結果。您希望能夠在需要時隨時手動呼叫程式碼。\n請問您可以使用哪一個資料庫物件來儲存程式碼？",
+      "options": [
+        {
+          "id": "a",
+          "text": "函式"
+        },
+        {
+          "id": "b",
+          "text": "預存程序"
+        },
+        {
+          "id": "c",
+          "text": "觸發程序"
+        },
+        {
+          "id": "d",
+          "text": "檢視表"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 49,
+      "text": "您正在開發一個SQL陳述式以建立資料表。請問哪兩個SQL關鍵字用於CREATE TABLE陳述式？(請選擇2個答案。)",
+      "options": [
+        {
+          "id": "a",
+          "text": "INSERT INTO"
+        },
+        {
+          "id": "b",
+          "text": "ORDER BY"
+        },
+        {
+          "id": "c",
+          "text": "PRIMARY KEY"
+        },
+        {
+          "id": "d",
+          "text": "CONSTRAINT"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 50,
+      "text": "您的公司將客戶的社會安全號碼儲存在Customers資料表的SSN資料行中。但是，新的合規法律禁止公司儲存這些資訊。執行下列查詢會導致系統發生錯誤。\nALTER TABLE Customers\nREMOVE SSN;\n請問您需要對上述查詢進行哪些變更，才能讓它從Customers資料表中移除SSN資料行？",
+      "options": [
+        {
+          "id": "a",
+          "text": "ALTER TABLE Customers DELETE SSN;"
+        },
+        {
+          "id": "b",
+          "text": "ALTER TABLE Customers DROP COLUMN SSN;"
+        },
+        {
+          "id": "c",
+          "text": "ALTER TABLE Customers DROP SSN;"
+        },
+        {
+          "id": "d",
+          "text": "ALTER TABLE Customers DELETE COLUMN SSN;"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 51,
+      "text": "您有一個儲存客戶相關資訊的Customer資料表，以及一個儲存已提交訂單相關資訊的Order資料表。每個資料表都含有一個CustomerID資料行。您使用個別資料表中的CustomerID資料行來聯結這兩個資料表。\n                \n您執行了一個選取下列資料的查詢：\n                \n                  \n所有客戶及其訂單\n                  \n沒有任何訂單的客戶\n                \n                \n   \n請問這些結果代表哪一種聯結？",
+      "options": [
+        {
+          "id": "a",
+          "text": "inner join(內部聯結)"
+        },
+        {
+          "id": "b",
+          "text": "full join(完整聯結)"
+        },
+        {
+          "id": "c",
+          "text": "complete join(完全聯結)"
+        },
+        {
+          "id": "d",
+          "text": "partial join(部分聯結)"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 52,
+      "text": "您需要從資料庫中移除名為EmployeeView的檢視表。\n請問您應該使用哪一個陳述式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "DELETE EmployeeView"
+        },
+        {
+          "id": "b",
+          "text": "DELETE VIEW EmployeeView"
+        },
+        {
+          "id": "c",
+          "text": "DROP VIEW EmployeeView"
+        },
+        {
+          "id": "d",
+          "text": "DROP EmployeeView"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 53,
+      "text": "您需要使用Employee這個現有資料中的資料填入名為EmployeeCopy的資料表。\n                \n請問您應該使用哪一個陳述式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "COPY * INTO Employee SELECT * FROM Employee"
+        },
+        {
+          "id": "b",
+          "text": "INSERT INTO EmployeeCopy SELECT * FROM Employee"
+        },
+        {
+          "id": "c",
+          "text": "SELECT * INTO EmployeeCopy SELECT * FROM Employee"
+        },
+        {
+          "id": "d",
+          "text": "INSERT * FROM Employee INTO EmployeeCopy"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 54,
+      "text": "對於下列每一項敘述，若[正確]為O，[錯誤]為X。\n1. 完整資料庫備份就是整個資料庫中所有資料的複本。\n2. 交易記錄備份會備份資料庫中的所有資料。\n3. 差異備份只會複製上次完整備份之前變更的資料。\n4. 檔案或檔案群組還原會指定要復原的資料庫部分。",
+      "options": [
+        {
+          "id": "a",
+          "text": "請問填入正確或錯誤符號的順序為何？"
+        },
+        {
+          "id": "b",
+          "text": "O、O、O、O"
+        },
+        {
+          "id": "c",
+          "text": "O、X、X、O"
+        },
+        {
+          "id": "d",
+          "text": "X、O、O、X"
+        },
+        {
+          "id": "e",
+          "text": "O、O、X、O"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 55,
+      "text": "您建立了一個名為Games的資料表，其中包含最近發行之電玩遊戲的評論分數。您需要建立了一個檢視表來傳回按照字母順序排列的遊戲名稱清單。\nName 代表遊戲名稱。\n請問您應該使用哪一個查詢？",
+      "options": [
+        {
+          "id": "a",
+          "text": "CREATE VIEW MyGames AS SELECT Name FROM Games"
+        },
+        {
+          "id": "b",
+          "text": "CREATE VIEW MyGames AS SELECT * FROM Games"
+        },
+        {
+          "id": "c",
+          "text": "CREATE VIEW MyGames AS SELECT Name FROM Games ORDER BY Name"
+        },
+        {
+          "id": "d",
+          "text": "CREATE VIEW MyGames AS SELECT * from Games WHERE Name BETWEEN 'A' AND 'Z'"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 56,
+      "text": "您需要刪除某個資料庫資料表。\n                \n請問您應該使用哪一個資料定義語言(DDL)\n關鍵字？",
+      "options": [
+        {
+          "id": "a",
+          "text": "TRUNCATE"
+        },
+        {
+          "id": "b",
+          "text": "ALTER"
+        },
+        {
+          "id": "c",
+          "text": "DROP"
+        },
+        {
+          "id": "d",
+          "text": "DELETE"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 57,
+      "text": "您正在撰寫一個SELECT陳述式找出名稱包含特定字元的所有產品。\n                \n請問您應該在WHERE\n子句中使用哪一個關鍵字？",
+      "options": [
+        {
+          "id": "a",
+          "text": "BETWEEN"
+        },
+        {
+          "id": "b",
+          "text": "FETCH"
+        },
+        {
+          "id": "c",
+          "text": "IN"
+        },
+        {
+          "id": "d",
+          "text": "LIKE"
+        }
+      ],
+      "answer": "d",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 58,
+      "text": "您有一個名為 Product 的資料表。Product 資料表包含ProductDescrption和ProductCategory的資料行。\n                \n您需要將Product 資料表中所有湯匙的ProductCategory值都變更為43。\n                \n如果ProductDescrption為spoon，就表示項目是湯匙。\n                \n請問您應該使用哪一個陳述式？",
+      "options": [
+        {
+          "id": "a",
+          "text": "UPDATE Product WHERE ProductDescription = 'spoon' SET ProductCategory = 43"
+        },
+        {
+          "id": "b",
+          "text": "SET Product WHERE ProductDescription = 'spoon' TO ProductCategory = 43"
+        },
+        {
+          "id": "c",
+          "text": "UPDATE Product SET ProductCategory = 43 WHERE ProductDescription = 'spoon'"
+        },
+        {
+          "id": "d",
+          "text": "SET Product TO ProductCategory = 43 WHERE ProductDescription = 'spoon'"
+        }
+      ],
+      "answer": "a",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 59,
+      "text": "您的資料庫有一個Department 資料表以及一個Employee 資料表。\n                \n您需要確保一位員工只能被指派到一個現有的部門。\n                \n請問您應該對Employee\n資料表用什麼？",
+      "options": [
+        {
+          "id": "a",
+          "text": "唯一條件約束"
+        },
+        {
+          "id": "b",
+          "text": "外部索引鍵"
+        },
+        {
+          "id": "c",
+          "text": "資料類型"
+        },
+        {
+          "id": "d",
+          "text": "索引"
+        },
+        {
+          "id": "e",
+          "text": "主索引鍵"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 60,
+      "text": "您建立了下列查詢來判斷Sample Movie是否只在Movie資料表中出現一次。\n                \nSELECT Title\n                \nFROM Movie\n                \nWHERE Title = 'Sample Movie'\n                \nORDER BY Title\n                \nGROUP BY Title\n                \nHAVING COUNT(*) = 1\n                \n當您執行此查詢後，卻傳回語法錯誤。\n                \n您需要修改查詢以正常執行(不發生錯誤)並傳回正確的結果。\n                \n請問您應該採取下列哪一項做法？",
+      "options": [
+        {
+          "id": "a",
+          "text": "移除GROUP BY子句。"
+        },
+        {
+          "id": "b",
+          "text": "將HAVING子句更為HAVINGCOU(Title) = 1"
+        },
+        {
+          "id": "c",
+          "text": "移除ORDER BY子句。"
+        },
+        {
+          "id": "d",
+          "text": "將HAVING子句變更為HAVINGCOUNT(1) = 1"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 61,
+      "text": "建立預存程序的其中一個原因是要：",
+      "options": [
+        {
+          "id": "a",
+          "text": "提升效能。"
+        },
+        {
+          "id": "b",
+          "text": "略過區分大小寫需求。"
+        },
+        {
+          "id": "c",
+          "text": "將儲存空間最小化。"
+        },
+        {
+          "id": "d",
+          "text": "讓使用者能夠控制查詢邏輯。"
+        }
+      ],
+      "answer": "a",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 62,
+      "text": "請問您應該使用哪一個陳述式來移除外部索引鍵？",
+      "options": [
+        {
+          "id": "a",
+          "text": "DELETE TABLE"
+        },
+        {
+          "id": "b",
+          "text": "DELETE FOREIGN KEY"
+        },
+        {
+          "id": "c",
+          "text": "ALTER FOREIGN KEY"
+        },
+        {
+          "id": "d",
+          "text": "ALTER TABLE"
+        }
+      ],
+      "answer": "d",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 63,
+      "text": "您有一個名為Product的資料表，其中包含一百萬個資料列。您需要使用下列查詢來搜尋產品資訊：\nSELECT ProductName, Price FROM Product WHERE Category = 'Science Books'\n請問以下何者能讓這種搜尋更有效率?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Price資料行的叢集索引"
+        },
+        {
+          "id": "b",
+          "text": "ProductName 資料行的叢集索引"
+        },
+        {
+          "id": "c",
+          "text": "Category資料行的非叢集索引"
+        },
+        {
+          "id": "d",
+          "text": "Price 資料行的非叢集索引"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 64,
+      "text": "請問哪一個陳述式會建立索引？",
+      "options": [
+        {
+          "id": "a",
+          "text": "CREATE TABLE Employee (EmployeeID INTEGER NULL)"
+        },
+        {
+          "id": "b",
+          "text": "CREATE TABLE Employee (EmployeeID INTEGER PRIMARY KEY)"
+        },
+        {
+          "id": "c",
+          "text": "CREATE TABLE Employee (EmployeeID INTEGER DISTINCT)"
+        },
+        {
+          "id": "d",
+          "text": "CREATE TABLE Employee (EmployeeID INTEGER INDEX)"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 65,
+      "text": "您有下列資料表定義：\nCREATE TABLE Road\n(RoadID INTEGER NOT NULL,\nDistance INTEGER NOT NULL)\nRoad資料表包含下列資料：\n您執行下列陳述式：INSERT INTO Road VALUES (1234, 36)結果是什麼？\nRoadID\nDistance\n1234\n22\n1384\n34",
+      "options": [
+        {
+          "id": "a",
+          "text": "發生錯誤，指出不允許重複的ID"
+        },
+        {
+          "id": "b",
+          "text": "發生錯誤，指出不允許NULL"
+        },
+        {
+          "id": "c",
+          "text": "在資料表中新資料列"
+        },
+        {
+          "id": "d",
+          "text": "語法錯誤"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 66,
+      "text": "您接受了某間地方慈善機構的IT實習工作。該慈善機構要求您使用一個名為Volunteer的資料庫資料表來保留志工的記錄。這個資料表包含以下資料行和資料列：\nID\nGivenName\nDateOfBirth\n1\nTia\n1976-05-30\n2\nSusana\n1952-11-04\n3\nJoey\n1963-02-17\n當志工要求從郵寄清單上移除時，您就必須更新資料表。您需要刪除GivenName 為Tia的所有記錄。請問您應該使用哪一個SQL陳述式？\nDELETE FROM Volunteer WHERE GivenName EQUALS ' Tia'",
+      "options": [
+        {
+          "id": "a",
+          "text": "DELETE FROM Volunteer WHERE GivenName = 'Tia'"
+        },
+        {
+          "id": "b",
+          "text": "DELETE FROM Volunteer WHERE GivenName == Tia'"
+        },
+        {
+          "id": "c",
+          "text": "DELETE FROM Volunteer WHERE GivenName IS 'Tia'"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 67,
+      "text": "Customers 資料表包含以下資料：\nID\nFirstName\nLastName\nPhoneNumber\nExtension\n1\nHope\nRagabash\n(123)555-0111\nNULL\n2\nLuna\nFaltor\n(123)555-0112\nNULL\n3\nMickey\nSassafras\n(123)555-0113\n12\n4\nMinnie\nHemingway\n(123)555-0114\n77\n5\nSherlock\nSteam\n(123)555-0115\nNULL\n您需要建立一個查詢來傳回包含LastName、PhoneNumber以及Extension且分機為有效號碼的結果集。此結果集應該依照客戶的姓氏來排序。\n程式碼如下：\nSELECT  LastName,  PhoneNumber,  Extension\nFROM   Customers\nWHERE        1               2\n3        LastName;\n請將下方的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次，也可能使用多次，甚至完全用不到。\n1. (A) PhoneNumber   (B)  NOT  NULL\n(C) IS NOT NULL (D) Extension\n(E) <> NULL\n2. (A) PhoneNumber   (B) NOT  NULL\n(C) IS NOT NULL (D) Extension\n(E) <> NULL\n3. (A) GROUP  BY     (B)  HAVING",
+      "options": [
+        {
+          "id": "a",
+          "text": "(C) ORDER  BY    (D) SORT  BY"
+        },
+        {
+          "id": "b",
+          "text": "A、B、D"
+        },
+        {
+          "id": "c",
+          "text": "D、C、C"
+        },
+        {
+          "id": "d",
+          "text": "D、C、D"
+        },
+        {
+          "id": "e",
+          "text": "A、C、D"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 68,
+      "text": "您有兩個資料表，分別名為Cars與Colors，其定義如下。這兩個資料表會透過ColorID建立關聯。\nCars資料表\nCar type\nCar model\nColorID\nSedan\n2-door\n2\nTruck\n4-door\nNULL\nMinivan\n3-door\n1\nColors資料表\nColor\nColorID\nRed\n1\nGold\n2\n您執行了下列SQL陳述式：\nSELECT *\nFROM Cars\nLEFT OUTER JOIN Colors\nON Cars.ColorID = Colors.ColorID\n請問此SQL陳述式會傳回多少個資料列？",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "3"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 69,
+      "text": "有一個資料庫資料表儲存了學校出勤率的相關資訊。您的資料集定義如下:\nStudentName\nGradeLevel\nDaysAbsent\nJohn\n12\n2.5\nHolly\n12\n0\nDavid\n12\n3\n您有下列需求:\nStudentName必須包含字元字串。\nGradeLevel必須是整數。\nDaysAbsent可以在小數點後面包含一位數字。\n可使用的資料型態是：\n(A)BIT                        (B)DECIMAL         (C)VARCHAR\n(D)DATETIME      (E)INT                      (F)CHAR\nStudentName、GradeLevel及DaysAbsent的資料型態為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "C、E、B"
+        },
+        {
+          "id": "b",
+          "text": "C、B、E"
+        },
+        {
+          "id": "c",
+          "text": "F、E、B"
+        },
+        {
+          "id": "d",
+          "text": "A、B、B"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 70,
+      "text": "ItemsOnOrder資料表包含以下資料：",
+      "options": [
+        {
+          "id": "a",
+          "text": "ID"
+        },
+        {
+          "id": "b",
+          "text": "ItemNumber"
+        },
+        {
+          "id": "c",
+          "text": "Quantity"
+        },
+        {
+          "id": "d",
+          "text": "UnitPrice"
+        },
+        {
+          "id": "e",
+          "text": "LineItemTotal"
+        },
+        {
+          "id": "f",
+          "text": "SELECT SUM(ID), AVG(LineItemIotal), MAX(LineItemIotal), SUM(LineItemIotal) FROM ItemsOnOrder"
+        },
+        {
+          "id": "g",
+          "text": "SELECT COUNT(ID), AVG(LineItemTotal), MAX(LineItemTotal), SUM(LineItemTotal) FROM ItemsOnOrder;"
+        },
+        {
+          "id": "h",
+          "text": "SELECT COUNT(ID), AVG(UnitPrice+Quantity), MAX(UnitPrice+Quantity), SUM(UnitPrice+Quantity) FROM ItemsOnOrder GROUP BY ItemNumber, LineItemTotal"
+        },
+        {
+          "id": "i",
+          "text": "SELECT COUNT(ID), AVG(LineItemTotal), MAX(LineItemTotal), SUM(LineItemTotal) FROM ItemsOnOrder HAVING ItemNumber, Quantity, UnitPrice"
+        }
+      ],
+      "answer": "b",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 71,
+      "text": "您需要刪除某個資料庫資料表。\n請問您應該使用哪一個資料定義語言(DDL)關鍵字？",
+      "options": [
+        {
+          "id": "a",
+          "text": "TRUNCATE"
+        },
+        {
+          "id": "b",
+          "text": "ALTER"
+        },
+        {
+          "id": "c",
+          "text": "DROP"
+        },
+        {
+          "id": "d",
+          "text": "DELETE"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 72,
+      "text": "您正在撰寫一個SELECT陳述式找出名稱包含特定字元的所有產品。\n請問您應該在WHERE子句中使用哪一個關鍵字？",
+      "options": [
+        {
+          "id": "a",
+          "text": "BETWEEN"
+        },
+        {
+          "id": "b",
+          "text": "FETCH"
+        },
+        {
+          "id": "c",
+          "text": "IN"
+        },
+        {
+          "id": "d",
+          "text": "LIKE"
+        }
+      ],
+      "answer": null,
+      "multi": false,
+      "hasImage": false
+    },
+    {
+      "id": 73,
+      "text": "下列名為Building的資料表儲存了數棟大樓的相關資料及其最新的檢查日期。\n欄位\n資料類型\n允許Null\nBuildingID\nINT\nFALSE\nAddress\nVARCHAR(100)\nFALSE\nInspectorID\nCHAR(3)\nTRUE\nInspectionDate\nDATETIME\nTRUE\nAddress欄位儲存的是大樓的地址。InspectionDate是最新的檢日查期。InspectionDate欄位中的NULL值代表大樓尚未檢查。\n您需要顯示最早完成檢查的10棟大樓地址，程式碼如下：\nSELECT        1        Address\nFROM  Building\nWHERE  InspectionDate        2\n3        InspectionDate\n請將下方的程式碼片段排列到上方缺失的正確位置。每個程式碼片段可能只使用一次，也可能使用多次，甚至完全用不到。\nA.  COUNT    B. IS NOT NULL   C. ORDER BY\nD.  HAVING   E. GROUP BY       F. IS NULL\nG.  TOP  10\n請問填入的程式碼片段順序為何？",
+      "options": [
+        {
+          "id": "a",
+          "text": "A、C、F"
+        },
+        {
+          "id": "b",
+          "text": "A、D、E"
+        },
+        {
+          "id": "c",
+          "text": "B、D、E"
+        },
+        {
+          "id": "d",
+          "text": "G、B、C"
+        }
+      ],
+      "answer": "c",
+      "multi": false,
+      "hasImage": false
+    }
+  ]
+}

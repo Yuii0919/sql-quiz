@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#1a56db">
+  <title>SQL 練習題</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>SQL 練習題</h1>
+      <p class="subtitle">搭車也能練 · 自動跳過重複題</p>
+    </header>
+
+    <section id="home-screen" class="screen active">
+      <div class="stats-card">
+        <div class="stat">
+          <span class="stat-value" id="total-count">—</span>
+          <span class="stat-label">題目總數</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="done-count">0</span>
+          <span class="stat-label">已完成</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="correct-count">0</span>
+          <span class="stat-label">答對</span>
+        </div>
+      </div>
+
+      <div class="mode-buttons">
+        <button type="button" class="btn btn-primary" id="btn-random">隨機練習</button>
+        <button type="button" class="btn btn-secondary" id="btn-seq">依序練習</button>
+        <button type="button" class="btn btn-outline" id="btn-reset">重置進度</button>
+      </div>
+
+      <p class="hint">題庫已自動去除重複題目，適合手機、平板使用。</p>
+    </section>
+
+    <section id="quiz-screen" class="screen">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="quiz-meta">
+        <span id="quiz-index">1 / 52</span>
+        <button type="button" class="btn-icon" id="btn-back" aria-label="返回">←</button>
+      </div>
+
+      <article class="question-card">
+        <p class="question-text" id="question-text"></p>
+        <div id="question-image" class="question-image hidden">
+          <img src="assets/images/schema-address.jpg" alt="題目附圖">
+        </div>
+        <ul class="options" id="options-list"></ul>
+      </article>
+
+      <div class="quiz-actions">
+        <button type="button" class="btn btn-outline" id="btn-skip">跳過</button>
+        <button type="button" class="btn btn-primary" id="btn-submit" disabled>確認答案</button>
+      </div>
+
+      <div id="feedback" class="feedback hidden"></div>
+      <button type="button" class="btn btn-secondary hidden" id="btn-next">下一題</button>
+    </section>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
