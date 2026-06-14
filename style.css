@@ -3,9 +3,9 @@
   --surface: #ffffff;
   --primary: #1a56db;
   --primary-dark: #1444b0;
-  --success: #059669;
-  --success-soft: #ecfdf5;
-  --success-border: #6ee7b7;
+  --success: #047857;
+  --success-soft: #f8fafc;
+  --success-border: #a7d4bc;
   --error: #b91c1c;
   --error-soft: #fef8f8;
   --error-border: #fca5a5;
@@ -262,16 +262,15 @@ body {
 }
 
 .option label.correct {
-  border-color: var(--success);
+  border-color: var(--success-border);
   background: var(--success-soft);
   border-width: 2px;
-  border-left-width: 5px;
-  border-left-color: var(--success);
+  border-left-width: 3px;
+  border-left-color: var(--success-border);
 }
 
 .option label.correct .option-text {
-  font-weight: 600;
-  font-size: 0.975rem;
+  font-weight: 500;
 }
 
 .option label.correct .option-letter {
@@ -307,9 +306,9 @@ body {
 }
 
 .badge-correct {
-  background: var(--success);
-  color: #fff;
-  border: none;
+  background: var(--success-soft);
+  color: var(--success);
+  border: 1px solid var(--success-border);
 }
 
 .badge-wrong {
@@ -320,17 +319,17 @@ body {
 
 .answer-panel {
   margin-top: 16px;
-  padding: 16px;
+  padding: 14px;
   border-radius: 12px;
-  background: var(--success-soft);
-  border: 2px solid var(--success);
+  background: var(--surface);
+  border: 1px solid var(--success-border);
 }
 
 .answer-panel-heading {
-  font-weight: 700;
-  font-size: 1.05rem;
+  font-weight: 600;
+  font-size: 0.95rem;
   color: var(--success);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .answer-panel-list {
@@ -343,32 +342,33 @@ body {
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  padding: 12px;
-  background: var(--surface);
+  padding: 10px 12px;
+  background: var(--success-soft);
   border-radius: 10px;
   border: 1px solid var(--success-border);
 }
 
 .answer-panel-letter {
   flex-shrink: 0;
-  min-width: 32px;
-  height: 32px;
+  min-width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--success);
-  color: #fff;
-  font-weight: 700;
+  background: var(--success-soft);
+  color: var(--success);
+  border: 1px solid var(--success-border);
+  font-weight: 600;
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .answer-panel-text {
   flex: 1;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.925rem;
+  line-height: 1.55;
   color: var(--text);
-  font-weight: 500;
+  font-weight: 400;
   word-break: break-word;
 }
 
@@ -433,9 +433,15 @@ body {
 }
 
 .feedback.correct {
-  background: var(--success-soft);
-  color: var(--success);
+  background: var(--surface);
+  color: var(--text);
   border: 1px solid var(--success-border);
+}
+
+.feedback.correct .feedback-title {
+  color: var(--success);
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .feedback.wrong {
@@ -487,13 +493,13 @@ body {
   }
 
   .option label.correct {
-    background: rgba(6, 78, 59, 0.45);
-    border-color: #10b981;
-    border-left-color: #10b981;
+    background: rgba(6, 78, 59, 0.15);
+    border-color: #047857;
+    border-left-color: #047857;
   }
 
   .option label.correct .option-text {
-    color: #f1f5f9;
+    color: var(--text);
   }
 
   .option label.wrong {
@@ -502,9 +508,9 @@ body {
   }
 
   .badge-correct {
-    background: #059669;
-    color: #fff;
-    border: none;
+    background: rgba(6, 78, 59, 0.2);
+    color: #6ee7b7;
+    border-color: #047857;
   }
 
   .badge-wrong {
@@ -514,8 +520,8 @@ body {
   }
 
   .answer-panel {
-    background: rgba(6, 78, 59, 0.35);
-    border-color: #10b981;
+    background: var(--surface);
+    border-color: #047857;
   }
 
   .answer-panel-heading {
@@ -523,12 +529,27 @@ body {
   }
 
   .answer-panel-item {
-    background: var(--surface);
+    background: rgba(6, 78, 59, 0.12);
+    border-color: #047857;
+  }
+
+  .answer-panel-letter {
+    background: rgba(6, 78, 59, 0.2);
+    color: #6ee7b7;
     border-color: #047857;
   }
 
   .answer-panel-text {
-    color: #f1f5f9;
+    color: var(--text);
+  }
+
+  .feedback.correct {
+    background: var(--surface);
+    border-color: #047857;
+  }
+
+  .feedback.correct .feedback-title {
+    color: #6ee7b7;
   }
 
   .feedback.wrong {

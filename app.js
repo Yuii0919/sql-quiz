@@ -155,9 +155,8 @@ function checkAnswer(q, chosen) {
   return true;
 }
 
-function highlightResults(q, chosen) {
+function highlightResults(q, chosen, isCorrect) {
   const expected = getExpectedIds(q);
-  let firstCorrect = null;
 
   document.querySelectorAll(".option input").forEach((input) => {
     input.disabled = true;
@@ -167,26 +166,21 @@ function highlightResults(q, chosen) {
 
     if (expected.has(id)) {
       label.classList.add("correct");
-      addOptionBadge(label, "✓ 正解", "badge-correct");
-      if (!firstCorrect) firstCorrect = label;
+      if (!isCorrect) {
+        addOptionBadge(label, "✓ 正解", "badge-correct");
+      }
     } else if (chosen.has(id)) {
       label.classList.add("wrong");
       addOptionBadge(label, "你的選擇", "badge-wrong");
-    } else if (q.answer) {
+    } else if (q.answer && !isCorrect) {
       label.classList.add("dimmed");
     }
   });
-
-  if (firstCorrect) {
-    setTimeout(() => {
-      firstCorrect.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 100);
-  }
 }
 
-function showAnswerPanel(q) {
+function showAnswerPanel(q, isCorrect) {
   const panel = $("#answer-panel");
-  if (!q.answer) {
+  if (!q.answer || isCorrect) {
     panel.classList.add("hidden");
     panel.innerHTML = "";
     return;
@@ -263,17 +257,18 @@ function submitAnswer() {
 
   const q = queue[currentIndex];
   const result = checkAnswer(q, [...selected]);
+  const isCorrect = result === true;
 
-  highlightResults(q, selected);
-  showAnswerPanel(q);
+  highlightResults(q, selected, isCorrect);
+  showAnswerPanel(q, isCorrect);
   renderFeedback(q, result);
 
-  if (q.answer) {
+  if (q.answer && !isCorrect) {
     setTimeout(() => {
       $("#answer-panel").scrollIntoView({ behavior: "smooth", block: "center" });
     }, 150);
   }
-  recordProgress(q.id, result === true);
+  recordProgress(q.id, isCorrect);
 
   $("#btn-submit").classList.add("hidden");
   $("#btn-next").classList.remove("hidden");
