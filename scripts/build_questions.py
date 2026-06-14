@@ -51,7 +51,7 @@ ANSWER_HINTS: list[tuple[str, str]] = [
     ("inner join(內部聯結)", "a"),
     ("DROP VIEW EmployeeView", "c"),
     ("EmployeeCopy的資料表", "b"),
-    ("完整資料庫備份", "b"),
+    ("差異備份只會複製", "c"),
     ("按照字母順序排列的遊戲名稱", "c"),
     ("刪除某個資料庫資料表", "c"),
     ("WHERE\n子句中使用哪一個關鍵字", "d"),
@@ -66,18 +66,17 @@ ANSWER_HINTS: list[tuple[str, str]] = [
     ("ProductCategory", "a"),  # 資料行
     ("LoanedBooks", "c"),
     ("Volunteer的資料庫資料表", "b"),
-    ("ItemsOnOrder", "b"),
     ("Building的資料表", "c"),
     ("ProductID 資料行是主索引鍵", "c"),
     ("ProductID與ProductCategory之間的關聯性", "a"),
-    ("Chapter和Language", "b"),
+    ("Chapter和Language", "b"),  # 單選題，非 ChapterLanguage 複選
     ("寵物比賽獲勝者", "b"),
     ("名為Cars的資料庫資料表", "c"),
     ("CREATE TABLE Road", "c"),
     ("Cars與Colors", "b"),
     ("第三正規形式", "c"),
     ("Origin <> 'USA'", "c"),
-    ("ChapterLanguage", "b,e"),
+    ("ChapterLanguage", "b,d"),
     # 以下為先前因特殊空白字元未能匹配的題目
     ("DELETE FROM Student 請問", "b"),
     ("部分資料列的FirstName", "b"),
@@ -209,10 +208,27 @@ def parse_text_questions(rtf_path: Path) -> list[dict]:
     def is_numeric_option(line: str) -> bool:
         return bool(re.match(r"^\d+$", line.strip()) and len(line) <= 4)
 
+    def is_sql_option_line(line: str) -> bool:
+        s = line.strip()
+        if re.match(r"^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|USE)\b", s, re.I):
+            return True
+        if re.match(r"^SET .+FROM ", s.replace(" ", ""), re.I):
+            return True
+        return False
+
     def split_q_and_options(content_lines: list[str]) -> tuple[str, list[str]]:
         lines = [l for l in content_lines if l and not l.startswith("配分") and not l.startswith("[2.")]
         if not lines:
             return "", []
+
+        # 優先：以 SQL 陳述式切分題幹與選項（表格題）
+        sql_idxs = [i for i, l in enumerate(lines) if is_sql_option_line(l)]
+        if sql_idxs:
+            first_sql = sql_idxs[0]
+            qtext = "\n".join(lines[:first_sql]).strip()
+            options = [l.strip() for l in lines[first_sql:] if is_sql_option_line(l)]
+            if len(options) >= 2:
+                return qtext, options
 
         # 末尾純數字選項（如 4、5、6、7 或 0、2、3、6）
         num_end = len(lines)
@@ -347,6 +363,78 @@ def normalize_match(text: str) -> str:
     return re.sub(r"\s+", " ", text.replace("\xa0", " ")).strip()
 
 
+def normalize_match(text: str) -> str:
+    return re.sub(r"\s+", " ", text.replace("\xa0", " ")).strip()
+
+
+def post_process_question(q: dict) -> dict:
+    """修正解析錯誤：題幹截斷、選項混入題目文字等"""
+    text = q["text"]
+    options = list(q["options"])
+    old_answer = q.get("answer")
+    old_by_id = {o["id"]: o["text"] for o in options}
+
+    # 選項中的「請問」移回題幹
+    kept: list[dict] = []
+    for o in options:
+        if o["text"].startswith("請問"):
+            text = text.rstrip() + "\n" + o["text"]
+        else:
+            kept.append(o)
+    options = kept
+
+    # 若混有 SQL 選項，只保留 SQL 陳述式（排除表格欄位名稱）
+    has_sql = any(
+        re.match(r"^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|USE)\b", o["text"].strip(), re.I)
+        for o in options
+    )
+    if has_sql:
+        sql_opts = [
+            o
+            for o in options
+            if re.match(
+                r"^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|USE|SET)\b",
+                o["text"].strip(),
+                re.I,
+            )
+        ]
+        if len(sql_opts) >= 2:
+            options = sql_opts
+
+    # 若混有 CREATE TABLE 選項，只保留 CREATE 開頭的
+    has_create = any(o["text"].strip().upper().startswith("CREATE") for o in options)
+    if has_create and not has_sql:
+        create_opts = [o for o in options if o["text"].strip().upper().startswith("CREATE")]
+        if len(create_opts) >= 2:
+            options = create_opts
+
+    # 重新編號選項
+    new_options = [{"id": chr(ord("a") + i), "text": o["text"]} for i, o in enumerate(options)]
+    q["text"] = text.strip()
+    q["options"] = new_options
+
+    # 依選項文字重對答案字母
+    if old_answer:
+        new_ids: list[str] = []
+        for aid in old_answer.split(","):
+            aid = aid.strip()
+            old_text = old_by_id.get(aid)
+            if not old_text:
+                continue
+            for o in new_options:
+                if o["text"] == old_text or normalize_match(o["text"]) == normalize_match(old_text):
+                    new_ids.append(o["id"])
+                    break
+        if new_ids:
+            q["answer"] = ",".join(new_ids)
+
+    norm = normalize_match(q["text"])
+    if "請選擇2個答案" in norm or "請選擇 2 個答案" in norm:
+        q["multi"] = True
+
+    return q
+
+
 def derive_answer(q: dict) -> str | None:
     text = normalize_match(q["text"])
     opts = {o["id"]: normalize_match(o["text"]) for o in q["options"]}
@@ -358,13 +446,41 @@ def derive_answer(q: dict) -> str | None:
             if "自動刪除" in text:
                 return oid
         if ot.startswith("INSERT INTO AddressInfo ([StreetAddress]"):
-            return oid
+            if "請選擇2" in text:
+                pass  # 下方複選處理
+            else:
+                return oid
         if "CREATE TABLE Student ( ID INT" in ot:
             return oid
         if "LIKE '%Chocolate%'" in ot:
             return oid
-        if ot == "EmployeeID" and "EmployeeName" in opts.values():
-            return "e"
+        if "SELECT COUNT(ID), AVG(LineItemTotal)" in ot and "GROUP BY" not in ot.upper() and "HAVING" not in ot.upper():
+            if "ItemsOnOrder" in text:
+                return oid
+        if ot == "O、X、X、O":
+            return oid
+        if "SELECT COUNT(*) FROM Employee" in ot and "資料列數目" in all_text:
+            return oid
+
+    if "請選擇2" in text and any("AddressInfo" in ot for ot in opts.values()):
+        ids = []
+        for oid, ot in opts.items():
+            if ot.startswith("INSERT INTO AddressInfo ([StreetAddress]"):
+                ids.append(oid)
+            if ot.startswith("INSERT INTO AddressInfo VALUES ('1234 Main Street'"):
+                ids.append(oid)
+        if len(ids) == 2:
+            return ",".join(sorted(ids))
+
+    if "ChapterLanguage" in text and "請選擇2" in text:
+        ids = [oid for oid, ot in opts.items() if ot in ("LanguageId", "ChapterId")]
+        if len(ids) == 2:
+            return ",".join(sorted(ids))
+
+    if "填入正確或錯誤符號" in text:
+        for oid, ot in opts.items():
+            if ot == "O、X、X、O":
+                return oid
 
     best: tuple[tuple[int, int], str] | None = None
     for hint, ans in ANSWER_HINTS:
@@ -413,14 +529,16 @@ def main() -> None:
 
     unique: list[dict] = []
     for q in seen.values():
+        q = post_process_question(q)
         answer = derive_answer(q)
+        multi = q.get("multi", False) or ("," in (answer or ""))
         unique.append(
             {
                 "id": len(unique) + 1,
                 "text": q["text"],
                 "options": q["options"],
                 "answer": answer,
-                "multi": "," in (answer or ""),
+                "multi": multi,
                 "hasImage": q["hasImage"],
             }
         )
